@@ -9,9 +9,7 @@ from get_docker_secret import get_docker_secret
 
 
 class S(BaseHTTPRequestHandler):
-    access_id = "AKIA2ZEQBPABD2OILGOT"
 
-    access_key = "31+LaS+k87Lou4OwESHonriLmqToiA+ZEr8YJpT2"
     session = boto3.session.Session(aws_access_key_id=access_id, aws_secret_access_key=access_key)
     client = session.client("dynamodb",region_name="ap-southeast-2")
     def _set_response(self):
