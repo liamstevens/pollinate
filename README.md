@@ -1,11 +1,21 @@
 # pollinate
 
-Build Process:
-In order to access DynamoDB, the Python runtime in the Docker image needs access to an AWS IAM user keypair. 
-To embed these secrets (I don't have the time to create a proper secrets management framework over a weekend!), export them as environment variables and pass them to the docker build command as follows:
+Heavily adapted from Hashicorp's publicly available EKS demo workspace.
+In order to provision the infrastructure, clone the repository and then run a terraform apply.
 
-$ export aws_id="NOT_A_REAL_ID"
+This will provision the following resources:
 
-$ export aws_key="NOT_A_REAL_SECRET_KEY"
+- EKS cluster
+- VPC
+- Subnets
+- IGW
+- NAT Gateway
+- Instances
+- Classic ELB
+- DynamoDB table for logging of connections
 
-$ docker build --tag python-docker --secret id=aws_id --secret id=aws_key .
+Once provisioning is complete, you can run a aws eks --region us-east-2 update-kubeconfig --name <resultant EKS name>  in order to update your local ~/.kube/config file. With this you can then interact with the provisioned EKS cluster. To deploy the app, run a kubectl apply -f ./deployment.yaml  to provision the load balancing service as well as the actual pod deployment of the application.
+  
+The default configuration for this is 3 hosts provisioned, with 4 deployed pods on each.
+  
+Each instance of the app will serve requests. The provisioned DynamoDB instance acts as the NOSQL database of connection times.
