@@ -15,20 +15,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-python
+  name: python-docker
 spec:
   selector:
     matchLabels:
-      app: hello-python
+      app: python-docker
   replicas: 4
   template:
     metadata:
       labels:
-        app: hello-python
+        app: python-docker
     spec:
       containers:
-      - name: hello-python
-        image: hello-python:latest
+      - name: python-docker
+        image: python-docker:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
