@@ -10,7 +10,8 @@ This will provision the following resources:
 - Subnets
 - IGW
 - NAT Gateway
-- Instances
+- Host Instances with k8s AMI
+- EC2 Autoscaling Group
 - Classic ELB
 - DynamoDB table for logging of connections
 
