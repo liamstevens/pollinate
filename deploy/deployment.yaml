@@ -28,7 +28,6 @@ spec:
     spec:
       containers:
       - name: python-docker
-        image: python-docker:latest
-        imagePullPolicy: Never
+        image: lstevens/test:latest
         ports:
         - containerPort: 8080
